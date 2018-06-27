@@ -1,15 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/white"
     >
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/main_gradient"
+        />
 
-    <ImageButton
-        android:id="@+id/signGoogle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.github.florent37.shapeofview.shapes.RoundRectView
+        android:id="@+id/roundRectView"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:background="@drawable/google_auth" />
+        android:elevation="3dp"
+        app:shape_roundRect_borderColor="@color/white"
+        app:shape_roundRect_borderWidth="2dp"
+        app:shape_roundRect_bottomLeftRadius="10dp"
+        app:shape_roundRect_bottomRightRadius="10dp"
+        app:shape_roundRect_topLeftRadius="10dp"
+        app:shape_roundRect_topRightRadius="10dp"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@color/white"
+            />
+
+
+
+        <co.ceryle.radiorealbutton.RadioRealButtonGroup
+            android:id="@+id/bGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:rrbg_animateDrawables_enter="overshoot"
+            app:rrbg_animateTexts_enter="overshoot"
+            app:rrbg_dividerColor="@color/black"
+            app:rrbg_dividerSize="1dp"
+            app:rrbg_radius="10dp"
+            app:rrbg_selectorColor="@color/colorPrimaryDark"
+            app:rrbg_selectorSize="6dp">
+
+            <co.ceryle.radiorealbutton.RadioRealButton
+                android:id="@+id/bParent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:rrb_drawable="@mipmap/ic_launcher"
+                app:rrb_drawableGravity="bottom"
+                app:rrb_drawableHeight="36dp"
+                app:rrb_drawablePadding="8dp"
+                app:rrb_drawableWidth="36dp"
+                app:rrb_ripple="true"
+                app:rrb_rippleColor="@color/black"
+                app:rrb_text="Родитель"
+                app:rrb_textColor="@color/black" />
+
+            <co.ceryle.radiorealbutton.RadioRealButton
+                android:id="@+id/bChild"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:rrb_drawable="@mipmap/ic_launcher"
+                app:rrb_drawableGravity="bottom"
+                app:rrb_drawableHeight="36dp"
+                app:rrb_drawablePadding="8dp"
+                app:rrb_drawableWidth="36dp"
+                app:rrb_ripple="true"
+                app:rrb_rippleColor="@color/black"
+                app:rrb_text="Ребенок"
+                app:rrb_textColor="@color/black" />
+        </co.ceryle.radiorealbutton.RadioRealButtonGroup>
+
+
+        <com.github.florent37.shapeofview.shapes.BubbleView
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            app:shape_bubble_arrowHeight="10dp"
+            app:shape_bubble_arrowPosition="bottom"
+            app:shape_bubble_arrowWidth="10dp"
+            app:shape_bubble_borderRadius="20dp"
+            android:layout_marginTop="90dp"
+            android:layout_marginLeft="75dp"
+            >
+
+            <ImageButton
+                android:id="@+id/signGoogle"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignEnd="@+id/roundRectView"
+                android:layout_below="@+id/roundRectView"
+                android:layout_marginTop="31dp"
+                android:background="@drawable/google_auth" />
+
+        </com.github.florent37.shapeofview.shapes.BubbleView>
+
+
+    </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+
+
+
 </RelativeLayout>
 
