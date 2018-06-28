@@ -29,9 +29,6 @@ public class MainActivity extends AppCompatActivity {
         this.setTitle("");
 
 
-
-
-
         mDrawerLayout= (DrawerLayout) findViewById(R.id.drawer_layout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout , R.string.openDrwm,R.string.closeDrwm);
         mDrawerLayout.addDrawerListener(mToggle);
@@ -41,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         toolbar.setNavigationIcon((getResources().getDrawable(R.drawable.ic_menu)));
         setSupportActionBar(toolbar);
-
+        Class fragmentClass=main_parent.class;
+        actToFragment(fragmentClass);
 
         setupDrawerContent(nvDrawer);
     }
@@ -66,20 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
         }
-
-        if(fragmentClass!=null) {
-            try {
-                Fragment myFragment = null;
-                myFragment = (Fragment) fragmentClass.newInstance();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, myFragment).commit();
-
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
+        if(fragmentClass!=null)
+            actToFragment(fragmentClass);
 
         mDrawerLayout.closeDrawers();
     }
@@ -100,6 +86,22 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void actToFragment(Class fragmentClass){
+        if(fragmentClass!=null) {
+            try {
+                Fragment myFragment = null;
+                myFragment = (Fragment) fragmentClass.newInstance();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, myFragment).commit();
+
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 
