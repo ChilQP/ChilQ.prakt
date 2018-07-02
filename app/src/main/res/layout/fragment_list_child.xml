@@ -1,0 +1,94 @@
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.example.zz.chilq.list_child">
+
+    <com.github.florent37.shapeofview.shapes.RoundRectView
+        android:id="@+id/roundRectView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:elevation="3dp"
+        app:shape_roundRect_borderColor="@color/white">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/main_gradient">
+
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto"
+                android:text="Добавить ребенка"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/white"/>
+
+            <EditText
+                android:id="@+id/id_child"
+                style="@style/FullWidthEditText"
+                android:layout_width="200dp"
+                android:layout_height="41dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/theme_edittext"
+                android:hint="Введите ИД ребенка"
+                android:inputType="text"
+                android:maxLength="40"
+                android:textSize="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+            <com.marozzi.roundbutton.RoundButton
+                android:id="@+id/bt"
+                android:layout_width="88dp"
+                android:layout_height="38dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="68dp"
+                android:gravity="center"
+                android:text="Добавить"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toTopOf="parent"
+                app:rb_animation_alpha="false"
+                app:rb_animation_corner_radius="20dp"
+                app:rb_animation_duration="500"
+                app:rb_animation_progress_color="@color/colorPrimaryDark"
+                app:rb_animation_progress_padding="8dp"
+                app:rb_animation_progress_style="dots"
+                app:rb_background_color="@color/white"
+                app:rb_background_color_pressed="@color/colorPrimaryDark"
+                app:rb_corner_color="@color/colorPrimaryDark"
+                app:rb_corner_color_pressed="@color/colorPrimaryDark"
+                app:rb_corner_radius="2dp"
+                app:rb_corner_width="1dp"
+                app:rb_text_color="@color/colorPrimaryDark"
+                app:rb_text_color_pressed="@android:color/white" />
+
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </com.github.florent37.shapeofview.shapes.RoundRectView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/child_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:layout_below="@+id/roundRectView"/>
+
+</RelativeLayout>

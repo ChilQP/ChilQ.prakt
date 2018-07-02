@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context=".employment.CreateTask">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="42dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="100dp">
+
+            <TextView
+                android:id="@+id/textViewRewardVal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="11dp"
+                android:layout_toStartOf="@+id/editTextReward"
+                android:fontFamily="@font/roboto"
+                android:text="Награда:"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editTextReward"
+                style="@style/FullWidthEditText"
+                android:layout_width="160dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/theme_edittext"
+                android:ems="10"
+                android:fontFamily="@font/roboto"
+                android:inputType="numberSigned"
+                android:text=""
+                android:textSize="15sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="18dp">
+
+            <com.marozzi.roundbutton.RoundButton
+                android:id="@+id/button"
+                android:layout_width="165dp"
+                android:layout_height="45dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="Загрузить фото"
+                android:textAllCaps="false"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/bGroup"
+                app:layout_constraintVertical_bias="0.0"
+                app:rb_animation_alpha="false"
+                app:rb_animation_corner_radius="20dp"
+                app:rb_animation_duration="500"
+                app:rb_animation_progress_color="@color/colorPrimaryDark"
+                app:rb_animation_progress_padding="8dp"
+                app:rb_animation_progress_style="dots"
+                app:rb_background_color="@color/white"
+                app:rb_background_color_pressed="@color/colorPrimaryDark"
+                app:rb_corner_color="@color/colorPrimaryDark"
+                app:rb_corner_color_pressed="@color/colorPrimaryDark"
+                app:rb_corner_radius="2dp"
+                app:rb_corner_width="1dp"
+                app:rb_text_color="@color/colorPrimaryDark"
+                app:rb_text_color_pressed="@android:color/white" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="187dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="217dp">
+
+            <TextView
+                android:id="@+id/textViewTaskDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/editTextDescription"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/roboto"
+                android:text="Описание задания:"
+                android:textAlignment="center"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/editTextDescription"
+                style="@style/FullWidthEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="47dp"
+                android:background="@drawable/theme_edittext"
+                android:ems="10"
+                android:fontFamily="@font/roboto"
+                android:inputType="textMultiLine"
+                android:maxLines="6" />
+
+            <EditText
+                android:id="@+id/editTextNameTask"
+                style="@style/FullWidthEditText"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/theme_edittext"
+                android:ems="10"
+                android:fontFamily="@font/roboto"
+                android:inputType="textPersonName"
+                android:text=""
+                android:textSize="15sp"
+                tools:layout_editor_absoluteY="128dp" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/uploadimg"
+            android:layout_width="140dp"
+            android:layout_height="206dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="18dp">
+
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="@drawable/upload_arrow" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/unadnapp"
+            android:layout_width="247dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="177dp"
+            android:layout_marginVertical="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_alignParentTop="true"
+
+                android:background="@drawable/back_but"
+                tools:layout_editor_absoluteX="200dp"
+                tools:layout_editor_absoluteY="335dp" />
+
+            <ImageButton
+                android:id="@+id/imageButtonAdd"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/not_okey_but"
+                tools:layout_editor_absoluteX="137dp"
+                tools:layout_editor_absoluteY="335dp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textViewNameTask"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/uploadimg"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/roboto"
+            android:text="Название задания:"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            />
+
+    </RelativeLayout>
+
+</FrameLayout>
