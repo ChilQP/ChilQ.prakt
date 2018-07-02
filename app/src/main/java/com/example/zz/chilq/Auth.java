@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -21,10 +23,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.marozzi.roundbutton.RoundButton;
 
 import co.ceryle.radiorealbutton.RadioRealButton;
 import co.ceryle.radiorealbutton.RadioRealButtonGroup;
 
+import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class Auth extends AppCompatActivity implements View.OnClickListener {
@@ -36,7 +40,9 @@ public class Auth extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth mAuth;
 
     private RadioRealButton bParent, bChild;
+    private RoundButton bGoogleA;
     private RadioRealButtonGroup radioRealButtonGroup;
+    private ProgressBar pbAuth;
 
     public ProgressDialog mProgressDialog;
 
@@ -45,11 +51,17 @@ public class Auth extends AppCompatActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
-        findViewById(R.id.signGoogle).setOnClickListener(this);
+        bGoogleA= (RoundButton) findViewById(R.id.signGoogle);
         bParent = (RadioRealButton) findViewById(R.id.bParent);
         bChild = (RadioRealButton) findViewById(R.id.bChild);
+        pbAuth=(ProgressBar)findViewById(R.id.pbAuth);
         radioRealButtonGroup = (RadioRealButtonGroup) findViewById(R.id.bGroup);
         radioRealButtonGroup.setPosition(0);
+        bParent.setChecked(true);
+        bParent.setOnClickListener(this);
+        bChild.setOnClickListener(this);
+        bGoogleA.setOnClickListener(this);
+
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -68,6 +80,16 @@ public class Auth extends AppCompatActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.signGoogle:
                 signIn();
+                bGoogleA.setVisibility(View.GONE);
+                pbAuth.setVisibility(View.VISIBLE);
+                break;
+            case R.id.bChild:
+                bParent.setChecked(false);
+                radioRealButtonGroup.setPosition(1);
+                break;
+            case R.id.bParent:
+                bChild.setChecked(false);
+                radioRealButtonGroup.setPosition(0);
                 break;
         }
     }
@@ -86,6 +108,8 @@ public class Auth extends AppCompatActivity implements View.OnClickListener {
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
+                bGoogleA.setVisibility(View.VISIBLE);
+                pbAuth.setVisibility(View.GONE);
                 Log.w(TAG, "Google sign in failed", e);
                 // [START_EXCLUDE]
                 // [END_EXCLUDE]
@@ -139,9 +163,15 @@ public class Auth extends AppCompatActivity implements View.OnClickListener {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Intent intent=new Intent(Auth.this ,MainActivity.class);
+                            if (bParent.isChecked())
+                                intent.putExtra("role","parent");
+                            else
+                                intent.putExtra("role","child");
                             startActivity(intent);
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            bGoogleA.setVisibility(View.VISIBLE);
+                            pbAuth.setVisibility(View.GONE);
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -152,6 +182,8 @@ public class Auth extends AppCompatActivity implements View.OnClickListener {
                         // [START_EXCLUDE]
                         hideProgressDialog();
                         // [END_EXCLUDE]
+                        bGoogleA.setVisibility(View.VISIBLE);
+                        pbAuth.setVisibility(View.GONE);
                     }
                 });
     }

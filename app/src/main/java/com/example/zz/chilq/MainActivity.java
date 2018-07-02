@@ -1,5 +1,6 @@
 package com.example.zz.chilq;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,6 +12,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 import com.example.zz.chilq.employment.create_emp;
 import com.example.zz.chilq.employment.my_emp;
@@ -38,7 +43,13 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         toolbar.setNavigationIcon((getResources().getDrawable(R.drawable.ic_menu)));
         setSupportActionBar(toolbar);
-        Class fragmentClass=main_parent.class;
+
+        Intent myIntent = getIntent();
+        Class fragmentClass = null;
+        if(myIntent.getStringExtra("role").equals("parent"))
+            fragmentClass=main_parent.class;
+        else
+            fragmentClass=main_child.class;
         actToFragment(fragmentClass);
 
         setupDrawerContent(nvDrawer);
@@ -102,6 +113,22 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(@NonNull MotionEvent event) {
+
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof EditText) {
+                v.clearFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+            }
+        }
+
+        return super.dispatchTouchEvent(event);
     }
 }
 

@@ -8,6 +8,10 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 /**
@@ -61,6 +65,10 @@ public class main_parent extends Fragment implements View.OnClickListener {
         }
     }
 
+    private TextView display_name, display_uid;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,6 +77,13 @@ public class main_parent extends Fragment implements View.OnClickListener {
 
         getActivity().setTitle("Родитель");
         rootView.findViewById(R.id.my_child).setOnClickListener(this);
+
+        display_name=(TextView)rootView.findViewById(R.id.display_name_parent);
+
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+
+        display_name.setText(user.getDisplayName());
 
         return rootView;
     }
