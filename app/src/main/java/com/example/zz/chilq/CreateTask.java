@@ -189,11 +189,9 @@ public void Add(View v){
                 break;
             case R.id.uploadimg:
                 upload(v);
-
                 break;
             case R.id.imageButtonAdd:
                 Add(v);
-
                 break;
         }
     }

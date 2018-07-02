@@ -74,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent=new Intent(MainActivity.this ,Auth.class);
                 startActivity(intent);
                 break;
+            case R.id.nav_main_menu:
+                fragmentClass=main_parent.class;
+                break;
         }
         if(fragmentClass!=null)
             actToFragment(fragmentClass);

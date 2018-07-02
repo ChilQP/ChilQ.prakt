@@ -7,12 +7,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.zz.chilq.adapter.child_list_adapter;
+import com.example.zz.chilq.model.user_model;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -20,10 +22,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.marozzi.roundbutton.RoundButton;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.support.constraint.Constraints.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -85,7 +91,7 @@ public class list_child extends Fragment implements View.OnClickListener {
     FirebaseUser user;
 
     private EditText idChild;
-    private List<String> stringList= new ArrayList<>();
+    private List<user_model> user_modelList= new ArrayList<>();
     private RecyclerView recyclerView;
     private child_list_adapter childListAdapter;
 
@@ -100,7 +106,7 @@ public class list_child extends Fragment implements View.OnClickListener {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.child_list);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        childListAdapter= new child_list_adapter(stringList);
+        childListAdapter= new child_list_adapter(user_modelList);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(childListAdapter);
@@ -119,7 +125,9 @@ public class list_child extends Fragment implements View.OnClickListener {
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    stringList.add((String) dataSnapshot.getValue());
+                    user_model userModel= null;
+                    userModel = dataSnapshot.getValue(user_model.class);
+                    user_modelList.add(userModel);
                     childListAdapter.notifyDataSetChanged();
                     btn.revertAnimation();
                 }
@@ -149,6 +157,23 @@ public class list_child extends Fragment implements View.OnClickListener {
 
         myRef.addChildEventListener(mChildEventListener);
 
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        Query applesQuery = ref.child("Child").orderByChild(user.getUid()).equalTo("fg");
+
+        applesQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot appleSnapshot: dataSnapshot.getChildren()) {
+                    appleSnapshot.getRef().removeValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled", databaseError.toException());
+            }
+        });
+
 
 
         return rootView;
@@ -177,9 +202,15 @@ public class list_child extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.bt:
                 btn.startAnimation();
-                myRef = FirebaseDatabase.getInstance().getReference();
-                myRef.child("Parents").child(user.getUid()).child("Child").push().setValue(idChild.getText().toString());
-                myRef.child("Child").child(idChild.getText().toString()).child("Parent").push().setValue(user.getUid());
+                if(!idChild.getText().toString().isEmpty()) {
+                    myRef = FirebaseDatabase.getInstance().getReference();
+                    user_model userModel = new user_model(1, idChild.getText().toString());
+                    myRef.child("Parents").child(user.getUid()).child("Child").push().setValue(userModel);
+                    userModel.setS_uid(user.getUid());
+                    myRef.child("Child").child(idChild.getText().toString()).child("Parent").push().setValue(userModel);
+                }
+                else
+                    btn.revertAnimation();
                 break;
         }
     }

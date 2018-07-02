@@ -52,7 +52,7 @@
 
 
     <com.github.florent37.shapeofview.shapes.RoundRectView
-        android:id="@+id/roundRectView"
+        android:id="@+id/create_task"
         android:layout_width="130dp"
         android:layout_height="100dp"
         android:layout_alignParentStart="true"
@@ -65,7 +65,8 @@
         app:shape_roundRect_bottomLeftRadius="10dp"
         app:shape_roundRect_bottomRightRadius="10dp"
         app:shape_roundRect_topLeftRadius="10dp"
-        app:shape_roundRect_topRightRadius="10dp">
+        app:shape_roundRect_topRightRadius="10dp"
+        android:clickable="true">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -100,11 +101,11 @@
     </com.github.florent37.shapeofview.shapes.RoundRectView>
 
     <com.github.florent37.shapeofview.shapes.RoundRectView
-        android:id="@+id/roundRectView2"
+        android:id="@+id/list_task"
         android:layout_width="130dp"
         android:layout_height="100dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/roundRectView"
+        android:layout_alignStart="@+id/create_task"
         android:elevation="3dp"
         android:layout_marginBottom="100dp"
         app:shape_roundRect_borderColor="@color/white"
@@ -112,7 +113,8 @@
         app:shape_roundRect_bottomLeftRadius="10dp"
         app:shape_roundRect_bottomRightRadius="10dp"
         app:shape_roundRect_topLeftRadius="10dp"
-        app:shape_roundRect_topRightRadius="10dp">
+        app:shape_roundRect_topRightRadius="10dp"
+        android:clickable="true">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -151,7 +153,7 @@
         android:layout_width="130dp"
         android:layout_height="100dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/roundRectView2"
+        android:layout_alignTop="@+id/list_task"
         android:layout_marginEnd="40dp"
         android:elevation="3dp"
         app:shape_roundRect_borderColor="@color/white"
@@ -197,7 +199,7 @@
         android:layout_width="130dp"
         android:layout_height="100dp"
         android:layout_alignStart="@+id/roundRectView3"
-        android:layout_alignTop="@+id/roundRectView"
+        android:layout_alignTop="@+id/create_task"
         android:elevation="3dp"
         app:shape_roundRect_borderColor="@color/white"
         app:shape_roundRect_borderWidth="2dp"
@@ -227,7 +229,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView4"
+                android:id="@+id/imageView44"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="52dp"

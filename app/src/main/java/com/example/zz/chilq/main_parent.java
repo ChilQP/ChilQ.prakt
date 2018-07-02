@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.zz.chilq.employment.create_emp;
+import com.example.zz.chilq.employment.my_emp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -77,6 +79,8 @@ public class main_parent extends Fragment implements View.OnClickListener {
 
         getActivity().setTitle("Родитель");
         rootView.findViewById(R.id.my_child).setOnClickListener(this);
+        rootView.findViewById(R.id.create_task).setOnClickListener(this);
+        rootView.findViewById(R.id.list_task).setOnClickListener(this);
 
         display_name=(TextView)rootView.findViewById(R.id.display_name_parent);
 
@@ -109,20 +113,43 @@ public class main_parent extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.my_child:
+            case R.id.my_child: {
                 Class fragmentClass;
-                fragmentClass=list_child.class;
-                try {
-                    Fragment myFragment=(Fragment)fragmentClass.newInstance();
-                    FragmentManager fragmentManager = getFragmentManager();
-                    View view = getActivity().getCurrentFocus();
-                    fragmentManager.beginTransaction().replace(R.id.content_frame, myFragment).commit();
-                } catch (java.lang.InstantiationException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
+                fragmentClass = list_child.class;
+                actToFragment(fragmentClass);
                 break;
+            }
+            case R.id.list_task:
+            {
+                Class fragmentClass;
+                fragmentClass = my_emp.class;
+                actToFragment(fragmentClass);
+                break;
+            }
+            case R.id.create_task:
+            {
+                Class fragmentClass;
+                fragmentClass = create_emp.class;
+                actToFragment(fragmentClass);
+                break;
+            }
+
+        }
+    }
+
+    private void actToFragment(Class fragmentClass){
+        if(fragmentClass!=null) {
+            try {
+                Fragment myFragment = null;
+                myFragment = (Fragment) fragmentClass.newInstance();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, myFragment).commit();
+
+            } catch (java.lang.InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
     }
 

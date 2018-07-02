@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.zz.chilq.R;
+import com.example.zz.chilq.model.user_model;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class child_list_adapter extends RecyclerView.Adapter<child_list_adapter.MyViewHolder> {
 
-    private List<String> stringList;
+    private List<user_model> stringList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
@@ -28,7 +29,7 @@ public class child_list_adapter extends RecyclerView.Adapter<child_list_adapter.
         }
     }
 
-    public child_list_adapter(List<String> stringList) {
+    public child_list_adapter(List<user_model> stringList) {
         this.stringList = stringList;
     }
 
@@ -42,8 +43,8 @@ public class child_list_adapter extends RecyclerView.Adapter<child_list_adapter.
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        String name =stringList.get(position);
-        holder.child_name.setText(name);
+        user_model name =stringList.get(position);
+        holder.child_name.setText(name.getS_uid());
     }
 
     @Override
