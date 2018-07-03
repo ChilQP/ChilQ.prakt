@@ -155,9 +155,13 @@ public class CreateTask extends Fragment implements View.OnClickListener {
 
 
     private void undo(){
-        Intent intent=new Intent(getActivity() ,MainActivity.class);
-        intent.putExtra("role", bundle.getString("role"));
-        startActivity(intent);
+        if (getActivity().getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getActivity().getSupportFragmentManager().popBackStack();
+        } else {
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.putExtra("role", bundle.getString("role"));
+            startActivity(intent);
+        }
     }
 
 

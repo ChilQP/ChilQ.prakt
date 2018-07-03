@@ -62,6 +62,9 @@ public class list_child extends Fragment implements View.OnClickListener {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.child_list);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        if(!user_modelList.isEmpty()) {
+            user_modelList.clear();
+        }
         childListAdapter= new child_list_adapter(user_modelList);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
