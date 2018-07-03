@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int id) {
                                 Intent intent = new Intent(MainActivity.this ,Auth.class);
                                 startActivity(intent);
+                                finish();
                             }
                         })
                         .setNegativeButton(R.string.dialog_text_exit_no, null);
@@ -152,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton(R.string.dialog_text_exit_yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
+                            Intent intent = new Intent(MainActivity.this ,Auth.class);
+                            startActivity(intent);
                             finish();
                         }
                     })
