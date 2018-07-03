@@ -79,7 +79,7 @@ public class main_parent extends Fragment implements View.OnClickListener {
                 myFragment = (Fragment) fragmentClass.newInstance();
                 FragmentManager fragmentManager = getFragmentManager();
                 myFragment.setArguments(bundle);
-                fragmentManager.beginTransaction().replace(R.id.content_frame, myFragment).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, myFragment).addToBackStack(null).commit();
             } catch (java.lang.InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
