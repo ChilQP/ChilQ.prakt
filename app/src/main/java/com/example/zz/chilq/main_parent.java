@@ -77,7 +77,7 @@ public class main_parent extends Fragment implements View.OnClickListener {
             try {
                 Fragment myFragment = null;
                 myFragment = (Fragment) fragmentClass.newInstance();
-                FragmentManager fragmentManager = getFragmentManager();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 myFragment.setArguments(bundle);
                 fragmentManager.beginTransaction().replace(R.id.content_frame, myFragment).addToBackStack(null).commit();
             } catch (java.lang.InstantiationException e) {
