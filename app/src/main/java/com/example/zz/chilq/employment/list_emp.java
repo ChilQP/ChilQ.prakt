@@ -66,6 +66,9 @@ public class list_emp extends Fragment {
         mLayoutManager = new LinearLayoutManager(rootView.getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
         //mAdapter = new parent_task_list_adapter(myDataset);
+        if(!task_modelList.isEmpty()){
+            task_modelList.clear();
+        }
         mAdapter = new child_task_list_adapter(task_modelList);
         mRecyclerView.setAdapter(mAdapter);
         
