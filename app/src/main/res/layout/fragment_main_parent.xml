@@ -50,7 +50,6 @@
     </com.github.florent37.shapeofview.shapes.ArcView>
 
 
-
     <com.github.florent37.shapeofview.shapes.RoundRectView
         android:id="@+id/create_task"
         android:layout_width="130dp"

@@ -47,7 +47,7 @@ public class list_child extends Fragment implements View.OnClickListener {
     private FirebaseUser user;
 
     private EditText idChild;
-    private List<user_model> user_modelList= new ArrayList<>();
+    private List<String> user_modelList= new ArrayList<>();
     private RecyclerView recyclerView;
     private child_list_adapter childListAdapter;
 
@@ -72,6 +72,7 @@ public class list_child extends Fragment implements View.OnClickListener {
 
         btn.setOnClickListener(this);
 
+
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
@@ -82,9 +83,7 @@ public class list_child extends Fragment implements View.OnClickListener {
             mChildEventListener = new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    user_model userModel= null;
-                    userModel = dataSnapshot.getValue(user_model.class);
-                    user_modelList.add(userModel);
+                    user_modelList.add(decodeFromFirebaseKey(dataSnapshot.getValue().toString()));
                     childListAdapter.notifyDataSetChanged();
                 }
 
@@ -132,6 +131,7 @@ public class list_child extends Fragment implements View.OnClickListener {
 
 
 
+
         return rootView;
     }
 
@@ -143,10 +143,8 @@ public class list_child extends Fragment implements View.OnClickListener {
                 if(!idChild.getText().toString().isEmpty()) {
                     myRef = FirebaseDatabase.getInstance().getReference();
                     incrementCounter();
-                    user_model userModel = new user_model(incr, idChild.getText().toString());
-                    myRef.child("Parents").child(user.getUid()).child("Child").child(userModel.getS_uid()).setValue(userModel);
-                    userModel.setS_uid(user.getUid());
-                    myRef.child("Child").child(idChild.getText().toString()).child("Parent").child(userModel.getS_uid()).setValue(userModel);
+                    myRef.child("Parents").child(user.getUid()).child("Child").child(encodeForFirebaseKey(idChild.getText().toString())).setValue(encodeForFirebaseKey(idChild.getText().toString()));
+                    myRef.child("Child").child(encodeForFirebaseKey(idChild.getText().toString())).child("Parent").child(user.getUid()).setValue(user.getUid());
 
                 }
 
@@ -188,4 +186,33 @@ public class list_child extends Fragment implements View.OnClickListener {
         }
         super.onDestroy();
     }
-}
+
+
+    public static String encodeForFirebaseKey(String s) {
+        return s
+                .replace("_", "__F")
+                .replace(".", "_P")
+                .replace("$", "_D")
+                .replace("#", "_H")
+                .replace("[", "_C")
+                .replace("]", "_C")
+                .replace("/", "_S")
+                ;
+    }
+
+    public static String decodeFromFirebaseKey(String s) {
+
+        return s
+                .replace("__F", "_")
+                .replace("_D", "$")
+                .replace("_H", "#")
+                .replace("_C", "[")
+                .replace("_C", "]")
+                .replace("_S", "/")
+                .replace("_P",".")
+                ;
+    }
+
+
+
+    }

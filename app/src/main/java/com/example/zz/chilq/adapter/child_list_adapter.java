@@ -1,4 +1,4 @@
-package com.example.zz.chilq.adapter;
+    package com.example.zz.chilq.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class child_list_adapter extends RecyclerView.Adapter<child_list_adapter.MyViewHolder> {
 
-    private List<user_model> stringList;
+    private List<String> stringList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
@@ -29,22 +29,21 @@ public class child_list_adapter extends RecyclerView.Adapter<child_list_adapter.
         }
     }
 
-    public child_list_adapter(List<user_model> stringList) {
+    public child_list_adapter(List<String> stringList) {
         this.stringList = stringList;
     }
 
     @Override
-    public child_list_adapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_child_list, parent, false);
-        return new child_list_adapter.MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        user_model name =stringList.get(position);
-        holder.child_name.setText(name.getS_uid());
+        holder.child_name.setText(stringList.get(position));
     }
 
     @Override

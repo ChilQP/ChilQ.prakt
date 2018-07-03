@@ -11,16 +11,18 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.example.zz.chilq.R;
+import com.example.zz.chilq.model.task_model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class child_task_list_adapter extends RecyclerView.Adapter<child_task_recycler_view_holder> {
 
-    private List<String> mDataset;
+    private List<task_model> mDataset= new ArrayList<>();
     private int lastPosition = -1;
 
-    public child_task_list_adapter(List<String> dataset) {
+    public child_task_list_adapter(List<task_model> dataset) {
         this.mDataset = dataset;
     }
 
@@ -35,13 +37,12 @@ public class child_task_list_adapter extends RecyclerView.Adapter<child_task_rec
 
     @Override
     public void onBindViewHolder(final child_task_recycler_view_holder holder, final int position) {
+        task_model taskModel=mDataset.get(position);
+
         holder.mImageView.setImageResource(R.drawable.ic_launcher_background);
-        holder.mTitleView.setText(mDataset.get(position));
-        holder.mDescriptionView.setText("Cyanogen Inc. — частная американская компания, занимающаяся разработкой Android-совместимого дистрибутива CyanogenMod и продвижением его коммерческой версии под названием Cyanogen OS.");
-
-        Random r = new Random();
-        holder.mRewardTextView.setText("Баллы: " + r.nextInt(100));
-
+        holder.mTitleView.setText(taskModel.getName_task());
+        holder.mDescriptionView.setText(taskModel.getDesc_task());
+        holder.mRewardTextView.setText("Баллы: " + taskModel.getReward());
         // description expand
         holder.mDescriptionView.setVisibility(View.GONE);
         holder.mRewardTextView.setVisibility(View.GONE);
