@@ -54,7 +54,7 @@ public class CreateTask extends Fragment implements View.OnClickListener {
         View rootView = inflater.inflate(R.layout.fragment_create_task, container,
                 false);
 
-        getActivity().setTitle("Создание задания:");
+        getActivity().setTitle("Создание задания");
 
         bundle=this.getArguments();
 
@@ -225,6 +225,7 @@ public class CreateTask extends Fragment implements View.OnClickListener {
         taskModel.setTask_compl(0);
         taskModel.setName_child("da");
         taskModel.setName_parent(user.getUid());
+        taskModel.setId_task(incr);
         myRef.child(String.valueOf(incr)).setValue(taskModel);
     }
 

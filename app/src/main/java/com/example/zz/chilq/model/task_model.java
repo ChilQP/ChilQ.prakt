@@ -20,10 +20,11 @@ public class task_model {
     private int task_compl;
     private String name_child;
     private String name_parent;
+    private long id_task;
 
 
 
-    public task_model(String name_task, String desc_task , String date_complete,  String pic_task, String pic_compl_task, String reward, String date_rec, int task_compl, String name_child, String namme_parent){
+    public task_model(String name_task, String desc_task , String date_complete,  String pic_task, String pic_compl_task, String reward, String date_rec, int task_compl, String name_child, String namme_parent, long id_task){
         this.name_task=name_task;
         this.desc_task=desc_task;
         this.date_complete=date_complete;
@@ -34,6 +35,7 @@ public class task_model {
         this.task_compl=task_compl;
         this.name_child=name_child;
         this.name_parent=namme_parent;
+        this.id_task=id_task;
     }
     public task_model(){
 //        DateFormat df = new SimpleDateFormat("dd.MM.yy");
@@ -120,5 +122,13 @@ public class task_model {
 
     public String getName_parent() {
         return name_parent;
+    }
+
+    public void setId_task(long id_task) {
+        this.id_task = id_task;
+    }
+
+    public long getId_task() {
+        return id_task;
     }
 }
