@@ -1,6 +1,7 @@
 package com.example.zz.chilq;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -9,11 +10,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -102,8 +102,19 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.nav_signout:
                 signOut();
-                Intent intent=new Intent(MainActivity.this ,Auth.class);
-                startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle(R.string.dialog_text_exit_title);
+                String message = getResources().getString(R.string.dialog_text_exit_message);
+                builder.setMessage(message)
+                        .setPositiveButton(R.string.dialog_text_exit_yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = new Intent(MainActivity.this ,Auth.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton(R.string.dialog_text_exit_no, null);
+                builder.create().show();
                 break;
             case R.id.nav_main_menu:
                 if(myIntent.getStringExtra("role").equals("parent"))
@@ -130,10 +141,28 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStack();
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.content_frame);
+
+        // instanceof is very slow, replace to something fastest
+        if(fragment instanceof main_child || fragment instanceof main_parent) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(R.string.dialog_text_exit_title);
+            String message = getResources().getString(R.string.dialog_text_exit_message);
+            builder.setMessage(message)
+                    .setPositiveButton(R.string.dialog_text_exit_yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton(R.string.dialog_text_exit_no, null);
+            builder.create().show();
         } else {
-            super.onBackPressed();
+            if (getFragmentManager().getBackStackEntryCount() > 0) {
+                getFragmentManager().popBackStack();
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
