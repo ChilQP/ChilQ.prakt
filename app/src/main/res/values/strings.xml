@@ -35,4 +35,10 @@
     <string name="dialog_text_delete_yes">Да</string>
     <string name="dialog_text_delete_no">Нет</string>
 
+    <!-- Exit -->
+    <string name="dialog_text_exit_title">Выход</string>
+    <string name="dialog_text_exit_message">Вы точно хотите выйти ?</string>
+    <string name="dialog_text_exit_yes">Да</string>
+    <string name="dialog_text_exit_no">Нет</string>
+
 </resources>
